@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MetroNome Admin</title>
+<style>
+body{background:#111;color:#fff;font-family:tahoma,sans-serif;max-width:1000px;margin:auto;padding:20px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:16px;padding:20px}
+input,textarea{width:100%;box-sizing:border-box;background:#222;color:#fff;border:1px solid #444;border-radius:10px;padding:12px;margin-top:6px}
+label{display:block;margin-top:14px}
+textarea{min-height:140px}
+button{padding:12px 16px;margin-top:12px;margin-left:8px;border:none;border-radius:10px;cursor:pointer}
+.drop-zone{border:2px dashed #555;border-radius:14px;padding:28px;text-align:center;background:#191919;margin-top:8px;cursor:pointer}
+.preview{max-width:220px;border-radius:12px;margin-top:10px;display:none}
+#output{background:#0d0d0d;padding:12px;border-radius:12px;white-space:pre-wrap;direction:ltr;text-align:left;margin-top:15px}
+</style>
+</head>
+<body>
+<h1>MetroNome Admin</h1>
+<div class="card">
+<label>songs.json فعلی</label><input type="file" id="songsFile" accept=".json">
+<label>عنوان آهنگ</label><input id="title">
+<label>خواننده</label><input id="artist">
+<label>ژانر</label><input id="genre" value="Pop">
+<label>تاریخ انتشار</label><input type="date" id="releaseDate">
+<label>مدت زمان</label><input id="duration">
+<label>توضیحات</label><textarea id="description"></textarea>
+<label>متن آهنگ</label><textarea id="lyrics"></textarea>
+<label>کاور</label><div id="coverDrop" class="drop-zone">📷 Drag & Drop Cover</div><input hidden type="file" id="cover" accept="image/*"><img id="coverPreview" class="preview">
+<label>MP3</label><div id="audioDrop" class="drop-zone">🎵 Drag & Drop Audio</div><input hidden type="file" id="audio" accept="audio/*">
+<br>
+<button onclick="generateSong()">ساخت JSON</button>
+<button onclick="copyJson()">کپی JSON</button>
+<button onclick="downloadSongsJson()">دانلود songs.json</button>
+<pre id="output"></pre>
+</div>
+<script>
+let generatedSong=null;
+function slugify(t){return t.toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-')}
+function generateSong(){
+const title=titleEl.value.trim(),artist=artistEl.value.trim();
+const slug=slugify(artist+'-'+title);
+const cover=coverInput.files[0],audio=audioInput.files[0];
+generatedSong={slug,title,artist,genre:genreEl.value,releaseDate:releaseDateEl.value,duration:durationEl.value,cover:cover?`uploads/covers/${slug}.${cover.name.split('.').pop()}`:'',audio:audio?`uploads/audio/${slug}.${audio.name.split('.').pop()}`:'',lyrics:lyricsEl.value,description:descriptionEl.value};
+output.textContent=JSON.stringify(generatedSong,null,2);}
+function copyJson(){if(!generatedSong)return;navigator.clipboard.writeText(JSON.stringify(generatedSong,null,2));alert('Copied');}
+function downloadSongsJson(){if(!generatedSong)return;const f=songsFile.files[0];if(!f)return alert('songs.json?');const r=new FileReader();r.onload=e=>{let s=JSON.parse(e.target.result);s.push(generatedSong);const b=new Blob([JSON.stringify(s,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='songs.json';a.click();};r.readAsText(f);}
+const titleEl=title,artistEl=artist,genreEl=genre,releaseDateEl=releaseDate,durationEl=duration,lyricsEl=lyrics,descriptionEl=description,output=document.getElementById('output');
+const coverInput=document.getElementById('cover'),audioInput=document.getElementById('audio');
+const coverDrop=document.getElementById('coverDrop'),audioDrop=document.getElementById('audioDrop'),coverPreview=document.getElementById('coverPreview');
+coverDrop.onclick=()=>coverInput.click();audioDrop.onclick=()=>audioInput.click();
+coverDrop.ondragover=audioDrop.ondragover=e=>{e.preventDefault();}
+coverDrop.ondrop=e=>{e.preventDefault();coverInput.files=e.dataTransfer.files;let f=e.dataTransfer.files[0];if(f){coverDrop.innerHTML='✅ '+f.name;coverPreview.src=URL.createObjectURL(f);coverPreview.style.display='block';}}
+audioDrop.ondrop=e=>{e.preventDefault();audioInput.files=e.dataTransfer.files;let f=e.dataTransfer.files[0];if(f)audioDrop.innerHTML='🎵 '+f.name;}
+</script></body></html>

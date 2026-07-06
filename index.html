@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MetroNome — آرشیو موزیک شخصی</title>
+<meta name="description" content="آرشیو شخصی آهنگ‌هایی که گوش می‌دم، با متن، اطلاعات ریلیز و امکان دانلود.">
+<link rel="stylesheet" href="css/style.css?v=1.0.2">
+<link rel="icon" href="uploads/covers/channel.jpg">
+<meta property="og:title" content="MetroNome">
+<meta property="og:description" content="Music Archive">
+<meta property="og:image" content="uploads/covers/og.jpg">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="tick"></span> MetroNome</a>
+    <nav class="nav-links">
+      <a href="#songs">آهنگ‌ها</a>
+      <a href="#channel">کانال تلگرام</a>
+      <a href="#about">درباره</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">آرشیو شخصی موزیک</span>
+      <h1 class="h-display"><br><em>metronome</em></h1>
+      <p class="lede">نمیدونم پلی‌لیست آهنگم برات جذابه یا نه، ولی هرچی هست با متن، اطلاعات ریلیز و لینک دانلود اینجاست.</p>
+      <div class="btn-row">
+        <a href="#songs" class="btn btn-primary">رفتن به آهنگ‌ها</a>
+        <a href="https://t.me/phonka313" target="_blank" rel="noopener" class="btn btn-ghost">عضویت در کانال تلگرام</a>
+      </div>
+    </div>
+    <div class="metronome" aria-hidden="true">
+      <div class="metronome-body"></div>
+      <div class="metronome-arm"></div>
+    </div>
+  </div>
+
+
+
+</section>
+
+<section id="channel">
+  <div class="wrap">
+    
+<div class="section-head">
+      <div>
+        <span class="eyebrow">۰۱ — کانال</span>
+        <h2 class="h-display">تلگرام MetroNome</h2>
+      </div>
+    </div>
+    <div class="channel-card">
+  <img src="uploads/covers/channel.jpg" alt="MetroNome Channel" class="channel-avatar">
+  <div class="channel-info">
+    <h3>MetroNome</h3>
+    <p>نمیدونم پلی لیست آهنگم برات جذابه یا نه!</p>
+    
+  </div>
+  <a href="https://t.me/YourChannel" target="_blank" class="btn btn-primary">ورود به کانال</a>
+</div>
+  </div>
+</section>
+
+<section id="songs">
+  <div class="search-sort-bar">
+  <input id="search" placeholder="نام آهنگ یا خواننده...">
+
+  <select id="genreFilter">
+    <option value="">همه ژانرها</option>
+  </select>
+
+  <select id="sortSongs">
+    <option value="new">جدیدترین</option>
+    <option value="old">قدیمی‌ترین</option>
+    <option value="az">A-Z</option>
+  </select>
+</div>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">۰۲ — آرشیو</span>
+        <h2 class="h-display">آهنگ‌ها</h2>
+      </div>
+      <span class="mono-readout" id="song-count"></span>
+    </div>
+    <div class="song-grid" id="song-grid">
+      <div class="mono-readout">در حال بارگذاری آهنگ‌ها...</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">۰۳ — درباره</span>
+        <h2 class="h-display">این سایت چیه؟</h2>
+      </div>
+    </div>
+    <p class="lede" style="max-width:640px">
+      این یه آرشیو شخصیه از آهنگ‌هایی که در کانال تلگرامم می‌گذارم. هر آهنگ یه صفحه مخصوص خودش داره با متن کامل،
+      اطلاعات ریلیز و امکان دانلود مستقیم. هدف اینه که چیزایی که گوش می‌دم رو راحت‌تر به اشتراک بگذارم.
+    </p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>MetroNome © <span id="year"></span></span>
+    <span class="mono-readout"><a href="https://t.me/phonka313" target="_blank" rel="noopener">@phonka313</a></span>
+  </div>
+</footer>
+
+<script src="js/main.js?v=1.0.2"></script>
+</body>
+</html>
